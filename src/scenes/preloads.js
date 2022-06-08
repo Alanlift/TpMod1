@@ -7,19 +7,25 @@ export class Preloads extends Phaser.Scene {
   }
 
   preload() {
+    this.load.audio('space','public/assets/sounds/InstrumentalSpace.wav');
     this.load.image("sad_cow", "public/assets/images/sad_cow.png");
     this.load.image("phaser_logo", "public/assets/images/phaser_logo.png");
     this.load.image(
       "mainmenu_bg",
       "public/assets/images/main_menu_background.png"
     );
+    this.load.image(
+      "retry_bg",
+      "public/assets/images/retry_background.jpg"
+    );
     this.load.image("sky", "public/assets/images/sky.png");
     this.load.image("ground", "public/assets/images/platform.png");
     this.load.image("star", "public/assets/images/star.png");
+    this.load.image("star2", "public/assets/images/star2.png");
     this.load.image("bomb", "public/assets/images/bomb.png");
     this.load.spritesheet("dude", "public/assets/images/dude.png", {
       frameWidth: 32,
-      frameHeight: 48,
+      frameHeight: 42,
     });
   }
 

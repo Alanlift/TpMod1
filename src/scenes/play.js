@@ -1,6 +1,7 @@
 // Declaracion de variables para esta escena
 var player;
 var stars;
+var stars2;
 var bombs;
 var cursors;
 var score;
@@ -22,7 +23,8 @@ export class Play extends Phaser.Scene {
 
   create() {
     const map = this.make.tilemap({ key: "map" });
-
+    let audio = this.sound.add('space',{loop: true});
+    audio.play();
     // Parameters are the name you gave the tileset in Tiled and then the key of the tileset image in
     // Phaser's cache (i.e. the name you used in preload)
     const tilesetBelow = map.addTilesetImage("sky_atlas", "tilesBelow");
@@ -64,7 +66,7 @@ export class Play extends Phaser.Scene {
 
     // Create empty group of starts
     stars = this.physics.add.group();
-
+    stars2 = this.physics.add.group();
     // find object layer
     // if type is "stars", add to stars group
     objectsLayer.objects.forEach((objData) => {
@@ -79,6 +81,12 @@ export class Play extends Phaser.Scene {
           star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
           break;
         }
+
+        case "stars2": {
+          var star2 = stars2.create(x, y, "star2");
+          star2.setBounceY(0.6);
+          break;
+        }
       }
     });
 
@@ -86,7 +94,7 @@ export class Play extends Phaser.Scene {
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(30, 6, "score: 0", {
+    scoreText = this.add.text(30, 6, "Score: 0", {
       fontSize: "32px",
       fill: "#000",
     });
@@ -95,10 +103,12 @@ export class Play extends Phaser.Scene {
     // REPLACE Add collision with worldLayer
     this.physics.add.collider(player, worldLayer);
     this.physics.add.collider(stars, worldLayer);
+    this.physics.add.collider(stars2, worldLayer);
     this.physics.add.collider(bombs, worldLayer);
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, this.collectStar, null, this);
+    this.physics.add.overlap(player, stars2, this.collectStar2, null, this);
 
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
 
@@ -108,6 +118,7 @@ export class Play extends Phaser.Scene {
 
   update() {
     if (gameOver) {
+      this.sound.stopAll();
       return;
     }
 
@@ -138,23 +149,52 @@ export class Play extends Phaser.Scene {
     score += 10;
     scoreText.setText("Score: " + score);
 
-    if (stars.countActive(true) === 0) {
-      //  A new batch of stars to collect
+    if (stars.countActive(true) === 0 && stars2.countActive(true) === 0) {
       stars.children.iterate(function (child) {
-        child.enableBody(true, child.x, child.y + 10, true, true);
+        child.enableBody(true, child.x, child.y-100, true, true);
       });
-
-      var x =
+      stars2.children.iterate(function (child) {
+        child.enableBody(true, child.x, child.y-100, true, true);
+     });
+     console.log("lol")
+     var x =
         player.x < 400
           ? Phaser.Math.Between(400, 800)
           : Phaser.Math.Between(0, 400);
+  
+      var bomb = bombs.create(x, 16, "bomb");
+      bomb.setBounce(1);
+      bomb.setCollideWorldBounds(true);
+      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+     }
+    }
 
+  collectStar2(player, star2) {
+    star2.disableBody(true, true);
+
+    //  Add and update the score
+    score += 15;
+    scoreText.setText("Score: " + score);
+
+    if (stars2.countActive(true) === 0 && stars.countActive(true) === 0) {
+      stars.children.iterate(function (child) {
+        child.enableBody(true, child.x, child.y-100, true, true);
+      });
+      stars2.children.iterate(function (child) {
+        child.enableBody(true, child.x, child.y-100, true, true);
+     });
+     console.log("lol")
+     var x =
+        player.x < 400
+          ? Phaser.Math.Between(400, 800)
+          : Phaser.Math.Between(0, 400);
+  
       var bomb = bombs.create(x, 16, "bomb");
       bomb.setBounce(1);
       bomb.setCollideWorldBounds(true);
       bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
     }
-  }
+  } 
 
   hitBomb(player, bomb) {
     this.physics.pause();

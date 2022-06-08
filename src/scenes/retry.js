@@ -19,7 +19,7 @@ export class Retry extends Phaser.Scene {
       .image(
         this.cameras.main.centerX,
         this.cameras.main.centerY,
-        "mainmenu_bg"
+        "retry_bg"
       )
       .setScale(1.1);
     // Vaca triste
@@ -41,7 +41,7 @@ export class Retry extends Phaser.Scene {
     const boton = new Button(
       this.cameras.main.centerX,
       this.cameras.main.centerY + this.cameras.main.centerY / 3,
-      "Retry",
+      "Reintentar",
       this,
       () => {
         // Instrucción para pasar a la escena Play

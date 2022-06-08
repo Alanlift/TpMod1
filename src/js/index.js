@@ -22,8 +22,8 @@ var config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 300 },
-      debug: false,
+      gravity: { y: 350 },
+      debug: true,
     },
   },
   scene: [Preloads, MainMenu, Play, Retry], // Listado de todas las escenas del juego, en orden
