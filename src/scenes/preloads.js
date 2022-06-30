@@ -9,6 +9,7 @@ export class Preloads extends Phaser.Scene {
   preload() {
     this.load.audio('space','public/assets/sounds/InstrumentalSpace.wav');
     this.load.image("sad_cow", "public/assets/images/sad_cow.png");
+    this.load.image("tuki", "public/assets/images/tuki.jpg");
     this.load.image("phaser_logo", "public/assets/images/phaser_logo.png");
     this.load.image(
       "mainmenu_bg",
@@ -18,6 +19,10 @@ export class Preloads extends Phaser.Scene {
       "retry_bg",
       "public/assets/images/retry_background.jpg"
     );
+    this.load.image(
+      "victoria_bg",
+      "public/assets/images/victoria_background.png"
+    );
     this.load.image("sky", "public/assets/images/sky.png");
     this.load.image("ground", "public/assets/images/platform.png");
     this.load.image("star", "public/assets/images/star.png");
@@ -25,7 +30,7 @@ export class Preloads extends Phaser.Scene {
     this.load.image("bomb", "public/assets/images/bomb.png");
     this.load.spritesheet("dude", "public/assets/images/dude.png", {
       frameWidth: 32,
-      frameHeight: 42,
+      frameHeight: 36,
     });
   }
 
