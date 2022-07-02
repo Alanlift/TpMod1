@@ -7,7 +7,7 @@ var cursors;
 var score;
 var gameOver;
 var scoreText;
-var contgan = 1;
+var contgan;
 
 // Clase Play2, donde se crean todos los sprites, el escenario del juego y se inicializa y actualiza toda la logica del juego.
 export class Play2 extends Phaser.Scene {
@@ -16,6 +16,9 @@ export class Play2 extends Phaser.Scene {
     super("Play2");
   }
 
+  init(data) {
+    score = data.score;
+  }
   preload() {
     this.load.tilemapTiledJSON("map2", "public/assets/tilemaps/map2.json");
     this.load.image("tilesBelow", "public/assets/images/sky_atlas.png");
@@ -86,7 +89,7 @@ export class Play2 extends Phaser.Scene {
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(30, 6, "Score: 0", {
+    scoreText = this.add.text(30, 6, "Score: " + score, {
       fontSize: "32px",
       fill: "#000",
     });
@@ -105,12 +108,11 @@ export class Play2 extends Phaser.Scene {
     this.physics.add.collider(player, bombs, this.hitBomb, null, this);
 
     contgan = 1
-    score = 0;
     gameOver = false;
   }
 
   update() {
-    if (score >= 300)
+    if (score >= 400)
     {
       this.sound.stopAll(),
       setTimeout(() => {

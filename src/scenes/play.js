@@ -108,7 +108,7 @@ export class Play extends Phaser.Scene {
   update() {
     if (score >= 160){
       this.sound.stopAll(),
-        this.scene.start("Play2")
+        this.scene.start("Play2", { score: score });
     }
     if (gameOver) {
       this.sound.stopAll();
