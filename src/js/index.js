@@ -5,7 +5,7 @@ import { Play2 } from "../scenes/play2.js";
 import { Retry } from "../scenes/retry.js";
 import { Victoria } from "../scenes/victoria.js";
 
-var config = {
+const config = {
   type: Phaser.AUTO,
   width: 800,
   height: 600,
@@ -32,4 +32,4 @@ var config = {
   // La primera escena es con la cual empieza el juego
 };
 
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
