@@ -1,13 +1,13 @@
 // Declaracion de variables para esta escena
-var player;
-var stars;
-var stars2;
-var bombs;
-var cursors;
-var score;
-var gameOver;
-var scoreText;
-var contgan;
+let player;
+let stars;
+let stars2;
+let bombs;
+let cursors;
+let score;
+let gameOver;
+let scoreText;
+let contgan;
 
 // Clase Play2, donde se crean todos los sprites, el escenario del juego y se inicializa y actualiza toda la logica del juego.
 export class Play2 extends Phaser.Scene {
@@ -72,13 +72,13 @@ export class Play2 extends Phaser.Scene {
         case "stars": {
           // add star to scene
           // console.log("estrella agregada: ", x, y);
-          var star = stars.create(x, y, "star");
+          const star = stars.create(x, y, "star");
           star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
           break;
         }
 
         case "stars2": {
-          var star2 = stars2.create(x, y, "star2");
+          const star2 = stars2.create(x, y, "star2");
           star2.setBounceY(0.6);
           break;
         }
@@ -161,15 +161,15 @@ export class Play2 extends Phaser.Scene {
       stars2.children.iterate(function (child) {
         child.enableBody(true, child.x, child.y-100, true, true);
      });
-     var x =
+     const x =
         player.x < 400
           ? Phaser.Math.Between(400, 800)
           : Phaser.Math.Between(0, 400);
   
-      var bomb = bombs.create(x, 16, "bomb");
-      bomb.setBounce(1);
-      bomb.setCollideWorldBounds(true);
-      bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        const bomb = bombs.create(x, 16, "bomb");
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
      }
     }
 
@@ -187,19 +187,18 @@ export class Play2 extends Phaser.Scene {
       stars2.children.iterate(function (child) {
         child.enableBody(true, child.x, child.y-100, true, true);
      });
-     var x =
+     const x =
         player.x < 400
           ? Phaser.Math.Between(400, 800)
           : Phaser.Math.Between(0, 400);
           for (let i=0; i<=contgan; i++)
           {
-            var bomb = bombs.create(x, 16, 'bomb');
+            const bomb = bombs.create(x, 16, 'bomb');
             bomb.setBounce(1);
             bomb.setCollideWorldBounds(true);
             bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
           }
         contgan++;
-        console.log(contgan);
     }
   } 
 

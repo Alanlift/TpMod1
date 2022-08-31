@@ -1,6 +1,6 @@
 import Button from "../js/button.js";
 
-var score;
+let score;
 
 // Clase Retry, donde se crean los botones, el logo y el fondo del menú derrota
 export class Retry extends Phaser.Scene {
